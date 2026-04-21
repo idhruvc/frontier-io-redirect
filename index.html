@@ -151,126 +151,576 @@
         }
     </style>
 </head>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rover | Search Petabytes in Seconds.</title>
-    <meta name="title" content="Rover | Search Petabytes in Seconds.">
-    <meta name="description" content="Search petabytes of raw logs in Azure/S3 with sub-second latency. 100x faster and 100x cheaper than legacy platforms.">
+<body class="antialiased">
 
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://roverhq.io/">
-    <meta property="og:title" content="Rover | Search Petabytes in Seconds.">
-    <meta property="og:description" content="Stop paying the indexing tax. $0.01 per 1TB scanned. Join the Alpha.">
-    <meta property="og:image" content="https://roverhq.io/og-image.png">
+    <!-- Header / Nav -->
+    <nav class="bg-black text-white p-4 flex justify-between items-center border-b-4 border-black sticky top-0 z-[100]">
+        <div class="flex items-center space-x-2">
+            <div class="bg-rover-orange text-black px-2 py-0.5 md:px-3 md:py-1 font-black text-xl md:text-2xl italic">R</div>
+            <span class="font-bold text-xl md:text-2xl tracking-tighter uppercase">ROVER</span>
+        </div>
+        
+        <div class="hidden lg:flex space-x-6 xl:space-x-8 font-bold text-[10px] uppercase tracking-widest">
+            <a href="#playground" class="hover:text-rover-orange transition-colors">Playground</a>
+            <a href="#competitors" class="hover:text-rover-orange transition-colors">Vs Competitors</a>
+            <a href="#why-rover" class="hover:text-rover-orange transition-colors">Why Rover</a>
+            <a href="#architecture" class="hover:text-rover-orange transition-colors">Architecture</a>
+        </div>
 
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://roverhq.io/">
-    <meta property="twitter:title" content="Rover | Search Petabytes in Seconds.">
-    <meta property="twitter:description" content="Bypass the network tax. 100x latency gain on unindexed data lakes.">
-    <meta property="twitter:image" content="https://roverhq.io/og-image.png">
+        <a href="mailto:contact@roverhq.io" class="bg-rover-orange border-2 border-black px-3 py-1.5 md:px-6 md:py-2 font-bold text-black uppercase text-[10px] md:text-sm shadow-[3px_3px_0px_white] active:shadow-none active:translate-x-0.5 transition-all">
+            Get_Started
+        </a>
+    </nav>
 
-    <meta name="keywords" content="Zero-I/O, LSM Quad, Roaring Bitmaps, Data Lake Search, S3 Query Engine, Indexing Tax">
-    <link rel="canonical" href="https://roverhq.io/">
-    <title>Rover | Zero-I/O Analytics</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700;800&display=swap" rel="stylesheet">
-    <style>
-        :root { --rover-yellow: #F0F000; --rover-orange: #FF5A1F; }
-        body { font-family: 'Space Grotesk', sans-serif; background-color: var(--rover-yellow); color: #000; }
-        .brutalist-card { border: 4px solid #000; box-shadow: 8px 8px 0px #000; transition: 0.1s; }
-        .brutalist-card:hover { transform: translate(-2px, -2px); box-shadow: 10px 10px 0px #000; }
-    </style>
-</head>
-
-<body class="antialiased min-h-screen flex flex-col items-center px-4 py-8">
-
-    <div class="max-w-7xl w-full">
-        <nav class="bg-black text-white p-4 flex justify-between items-center border-b-4 border-black sticky top-0 z-[100]">
-            <div class="flex items-center space-x-2">
-                <div class="bg-rover-orange text-black px-2 py-0.5 md:px-3 md:py-1 font-black text-xl md:text-2xl italic">R</div>
-                <span class="font-bold text-xl md:text-2xl tracking-tighter uppercase">ROVER</span>
-            </div>
-        </nav>
-
-        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 mt-10">
+    <!-- Hero Section -->
+    <header class="py-12 md:py-20 px-4 md:px-6 border-b-8 border-black">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12">
             <div class="lg:col-span-8">
                 <h1 class="text-5xl sm:text-7xl md:text-8xl lg:text-[100px] font-black leading-[0.9] tracking-tighter uppercase italic mb-6 md:mb-8">
-                    SEARCH<br>PETABYTES<br>
-                    <span class="bg-black text-white px-2 md:px-4 inline-block mt-2">IN SECONDS.</span>
+                    SEARCH<br>PETABYTES<br><span class="bg-black text-white px-2 md:px-4">IN SECONDS.</span>
                 </h1>
-
                 <p class="text-xl md:text-3xl font-bold mb-12 max-w-2xl leading-tight uppercase">
                     <span class="text-rover-orange">Stop paying indexing-tax</span>. Search petabytes of raw logs in Azure with sub-second latency. Faster than Snowflake, cheaper than Datadog.
                 </p>
+                <!-- <div class="flex flex-wrap gap-4">
+                    <a href="#playground" class="bg-black text-white px-8 py-4 font-bold text-xl brutalist-card hover:bg-rover-orange hover:text-black uppercase italic inline-block">
+                        Launch_Playground
+                    </a>
+                    <a href="#benchmarks" class="bg-white text-black px-8 py-4 font-bold text-xl brutalist-card hover:bg-black hover:text-white uppercase italic inline-block">
+                        View_Benchmarks
+                    </a>
+                </div> -->
+                <!-- Email Subscription Section -->
+                <div class="bg-white brutalist-card p-2 mb-12 mt-8">
+                    <form action="https://formspree.io/f/xgopbprl" method="POST" class="flex flex-col md:flex-row gap-2">
+                        <input 
+                            type="email" name="email" 
+                            placeholder="EMAIL_ADDRESS" required
+                            class="flex-1 p-4 font-bold text-black focus:outline-none uppercase text-lg"
+                        >
+                        <button type="submit" class="bg-black text-white px-10 py-4 font-black text-xl hover:bg-rover-orange hover:text-black transition-all italic uppercase">
+                            JOIN_WAITING_LIST
+                        </button>
+                    </form>
+                </div>
             </div>
-
+            
             <div class="lg:col-span-4 flex flex-col gap-4">
                 <div class="bg-white p-6 brutalist-card">
                     <h2 class="text-[10px] font-black uppercase mb-2 text-gray-500">Scan Speed</h2>
-                    <div class="text-4xl md:text-5xl font-black italic">1.2s</div>
+                    <div class="text-5xl font-black italic">1.2s</div>
                     <div class="text-xs font-bold uppercase">For 1TB Query</div>
                 </div>
                 <div class="bg-rover-orange p-6 brutalist-card text-white">
                     <h2 class="text-[10px] font-black uppercase mb-2 text-black/50">Cost Efficiency</h2>
-                    <div class="text-4xl md:text-5xl font-black italic text-black">$0.01</div>
+                    <div class="text-5xl font-black italic text-black">$0.01</div>
                     <div class="text-xs font-bold uppercase text-black">Per 1TB Scanned</div>
                 </div>
             </div>
         </div>
+    </header>
 
-        <div class="bg-white brutalist-card p-2 mb-12 mt-8">
-            <form action="https://formspree.io/f/xgopbprl" method="POST" class="flex flex-col md:flex-row gap-2">
-                <input 
-                    type="email" name="email" 
-                    placeholder="EMAIL_ADDRESS" required
-                    class="flex-1 p-4 font-bold text-black focus:outline-none uppercase text-lg"
-                >
-                <button type="submit" class="bg-black text-white px-10 py-4 font-black text-xl hover:bg-rover-orange hover:text-black transition-all italic uppercase">
-                    JOIN_WAITING_LIST
-                </button>
-            </form>
+
+    <!-- Playground Section -->
+    <section id="playground" class="py-16 md:py-24 px-4 md:px-6 bg-black text-white border-b-8 border-black">
+        <div class="max-w-5xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-6">
+                <div>
+                    <h2 class="text-4xl md:text-5xl font-black italic uppercase tracking-tighter text-rover-yellow mb-2">QUERY_ENGINE_PLAYGROUND</h2>
+                    <p class="text-gray-400 font-bold uppercase text-xs italic tracking-widest">Direct SQL on Object Storage // Outperforming Presto & Trino</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="text-[9px] font-bold text-gray-500 uppercase mr-1">Cluster Size:</span>
+                    <button onclick="setSize(1)" id="size-1" class="terminal-btn active">1TB</button>
+                    <button onclick="setSize(10)" id="size-10" class="terminal-btn">10TB</button>
+                    <button onclick="setSize(50)" id="size-50" class="terminal-btn">50TB</button>
+                    <button onclick="setSize(100)" id="size-100" class="terminal-btn">100TB</button>
+                </div>
+            </div>
+
+            <div class="code-block brutalist-card relative overflow-hidden bg-[#0d0d0d] border-white/10">
+                <div class="flex justify-between items-center mb-6 border-b border-white/10 pb-4">
+                    <span class="text-rover-yellow font-bold text-[10px] tracking-widest uppercase italic">Rover Engine Live v2.6</span>
+                    <span class="text-gray-600 font-mono text-[10px] italic">EST_LATENCY: <span id="est-time" class="text-rover-yellow">0.5</span>s</span>
+                </div>
+
+                <div class="mb-8 min-h-[60px]">
+                    <div class="flex items-start gap-3">
+                        <span class="text-rover-orange font-bold font-mono text-xl">></span>
+                        <div id="query-input" class="text-white font-mono text-base md:text-lg outline-none w-full break-all" contenteditable="true">SELECT avg(latency) FROM llm_inference WHERE injection = true</div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row md:items-center gap-6 border-t border-white/10 pt-6">
+                    <button onclick="runQuery()" id="run-btn" class="bg-rover-orange text-black font-black px-8 py-3 uppercase italic hover:bg-white transition-all">
+                        EXECUTE_SEARCH
+                    </button>
+                    
+                    <div id="results-meta" class="hidden flex flex-wrap gap-x-8 gap-y-2 text-[11px] font-mono font-bold uppercase tracking-wider text-gray-400">
+                        <div>Rows: <span class="text-rover-yellow" id="res-rows">...</span></div>
+                        <div>Latency: <span class="text-rover-yellow" id="res-time">...</span>s</div>
+                        <div>Scanned: <span class="text-rover-yellow" id="res-scanned">...</span></div>
+                        <div>TCO: <span class="text-rover-yellow" id="res-cost">...</span></div>
+                    </div>
+                </div>
+
+                <div id="loading-overlay" class="absolute inset-0 bg-black/95 flex items-center justify-center hidden z-10">
+                    <div class="text-center">
+                        <div class="text-rover-orange font-black text-2xl italic animate-pulse mb-2 tracking-tighter uppercase">Scanning_Data_Lake</div>
+                        <div class="text-white text-[8px] font-mono tracking-[0.2em] uppercase">Workers Active: 1024 // Partition Pruning</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Suggestions -->
+            <div class="mt-10">
+                <h3 class="text-rover-yellow text-[10px] font-black uppercase mb-4 tracking-widest italic">Common Search Platform Queries</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-[11px] font-mono text-gray-500">
+                    <div class="query-suggestion bg-white/5 p-3 border border-white/10 hover:border-rover-orange transition-all" onclick="setQuery(this.innerText)">SELECT count(*) FROM card_transactions WHERE type = 'beneficiary_change'</div>
+                    <div class="query-suggestion bg-white/5 p-3 border border-white/10 hover:border-rover-orange transition-all" onclick="setQuery(this.innerText)">SELECT LiDAR_status FROM vehicle_logs WHERE error = 'RADAR_FAIL'</div>
+                    <div class="query-suggestion bg-white/5 p-3 border border-white/10 hover:border-rover-orange transition-all" onclick="setQuery(this.innerText)">SELECT count(*) FROM patient_ehr_access WHERE role != 'Physician'</div>
+                    <div class="query-suggestion bg-white/5 p-3 border border-white/10 hover:border-rover-orange transition-all" onclick="setQuery(this.innerText)">SELECT avg(latency) FROM llm_inference WHERE injection = true</div>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 font-mono text-[10px] md:text-xs font-black uppercase italic pb-10">
-            <div class="border-l-4 border-black pl-3">
-                <div class="text-rover-orange">Paradigm</div>
-                <div>Zero-Copy_Architecture</div>
+    <!-- ROVER VS COMPETITORS SECTION -->
+    <section id="competitors" class="py-16 md:py-24 px-4 md:px-6 bg-rover-yellow border-b-8 border-black">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-12">
+                <h2 class="text-4xl md:text-7xl font-black italic uppercase tracking-tighter mb-4">ROVER VS COMPETITORS</h2>
+                <p class="text-xl md:text-2xl font-bold max-w-3xl leading-tight">
+                    The comprehensive breakdown of why global enterprises are offloading legacy stacks to Rover's data lake query engine.
+                </p>
             </div>
-            <div class="border-l-4 border-black pl-3">
-                <div class="text-rover-orange">Performance</div>
-                <div>100x_Latency_Gain</div>
-            </div>
-            <div class="border-l-4 border-black pl-3">
-                <div class="text-rover-orange">Retrieval</div>
-                <div>Surgical_Byte-Range</div>
-            </div>
-            <div class="border-l-4 border-black pl-3">
-                <div class="text-rover-orange">Economics</div>
-                <div>100x_Cost_Efficiency</div>
+
+            <div id="use-case-container" class="bg-white brutalist-card overflow-hidden">
+                <div id="records-list" class="divide-y-2 divide-black"></div>
+                
+                <div class="bg-black text-white p-4 flex justify-between items-center font-bold text-xs md:text-sm uppercase tracking-widest italic">
+                    <button id="prev-btn" onclick="prevPage()" class="nav-btn flex items-center gap-2 hover:text-rover-orange transition-all">
+                        <span>← PREV_PAGE</span>
+                    </button>
+                    <div id="page-indicator">PAGE 1 OF 3</div>
+                    <button id="next-btn" onclick="nextPage()" class="nav-btn flex items-center gap-2 hover:text-rover-orange transition-all">
+                        <span>NEXT_PAGE →</span>
+                    </button>
+                </div>
             </div>
         </div>
-        <!-- MINIMAL SINGLE LINE CONTACT FOOTER -->
-        <footer class="w-full border-t-4 border-black pt-6 pb-6 text-center">
-            <p class="font-black uppercase tracking-tight text-sm md:text-base">
-                Contact for early bird offers at 
-                <a href="mailto:contactus@roverhq.io" class="inline-block ml-1 bg-black text-rover-yellow px-3 py-1 hover:bg-rover-orange hover:text-black transition-all transform hover:scale-105">
-                    contactus@roverhq.io
-                </a>
-            </p>
-        </footer>
-    </div>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-VEBTYNJ650"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    </section>
 
-  gtag('config', 'G-VEBTYNJ650');
-</script>
+    <!-- Why Rover / Testimonials -->
+    <section id="why-rover" class="py-16 md:py-24 px-4 md:px-6 bg-white border-b-8 border-black">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl md:text-6xl font-black mb-12 md:mb-16 tracking-tighter italic uppercase text-center">WHY DATA LEADERS CHOOSE ROVER</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+                <div class="flex flex-col sm:flex-row gap-4 md:gap-6 items-start">
+                    <div class="testimonial-avatar flex items-center justify-center bg-blue-500 shadow-[4px_4px_0px_black]">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="white"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1 11h-4v4h-4v-4H6v-4h4V6h4v4h4v4z"/></svg>
+                    </div>
+                    <div class="brutalist-card p-5 md:p-6 bg-white relative w-full">
+                        <div class="text-[9px] font-black bg-black text-white px-2 py-1 absolute -top-3 left-4 uppercase italic">Search_Platform_Lead</div>
+                        <p class="font-bold text-sm md:text-base mb-4 italic">"We migrated from Athena to Rover for our log search. The latency dropped by 80%, and we stopped worrying about partition scanning costs."</p>
+                        <div class="flex justify-between items-center text-[9px] font-black uppercase text-gray-500 italic">
+                            <span>Migrated from: Amazon Athena</span>
+                            <span>Speed: 10x</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-4 md:gap-6 items-start">
+                    <div class="testimonial-avatar flex items-center justify-center bg-green-500 shadow-[4px_4px_0px_black]">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="white"><path d="M11.8 2.1L3 6.1v1.9h18V6.1l-8.8-4c-.1 0-.3 0-.4 0zM5 11v8h2v-8H5zm5 0v8h2v-8h-2zm1.2 10.9c.1 0 .2.1.3.1.1 0 .2 0 .3-.1l8.8-4c.2-.1.4-.3.4-.5V11h-2v7.1L12 21.7l-7.1-3.6V11H3v6.4c0 .2.1.4.3.5l8.5 4zM15 11v8h2v-8h-2z"/></svg>
+                    </div>
+                    <div class="brutalist-card p-5 md:p-6 bg-white relative w-full">
+                        <div class="text-[9px] font-black bg-black text-white px-2 py-1 absolute -top-3 left-4 uppercase italic">CTO @ Global Fintech</div>
+                        <p class="font-bold text-sm md:text-base mb-4 italic">"Rover replaced our expensive Splunk cluster for fraud detection logs. We query 50TB of S3 data in under 2 seconds now."</p>
+                        <div class="flex justify-between items-center text-[9px] font-black uppercase text-gray-500 italic">
+                            <span>Old Platform: Splunk</span>
+                            <span>Infrastructure: S3 Data Lake</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-4 md:gap-6 items-start">
+                    <div class="testimonial-avatar flex items-center justify-center bg-purple-500 shadow-[4px_4px_0px_black]">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="white"><path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"/></svg>
+                    </div>
+                    <div class="brutalist-card p-5 md:p-6 bg-white relative w-full">
+                        <div class="text-[9px] font-black bg-black text-white px-2 py-1 absolute -top-3 left-4 uppercase italic">Head of AI @ AutoTech</div>
+                        <p class="font-bold text-sm md:text-base mb-4 italic">"Monitoring LiDAR and camera telemetry for millions of vehicles is a nightmare in Snowflake. Rover handles petabytes with zero indexing time."</p>
+                        <div class="flex justify-between items-center text-[9px] font-black uppercase text-gray-500 italic">
+                            <span>Scale: 500TB/Day</span>
+                            <span>Industry: Autonomous Vehicles</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-4 md:gap-6 items-start">
+                    <div class="testimonial-avatar flex items-center justify-center bg-red-500 shadow-[4px_4px_0px_black]">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="white"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                    </div>
+                    <div class="brutalist-card p-5 md:p-6 bg-white relative w-full">
+                        <div class="text-[9px] font-black bg-black text-white px-2 py-1 absolute -top-3 left-4 uppercase italic">CISO @ HealthNetwork</div>
+                        <p class="font-bold text-sm md:text-base mb-4 italic">"For HIPAA compliance, we need instant search over 7 years of audit trails. Rover gives us Datadog-like search speed at 1/10th the cost."</p>
+                        <div class="flex justify-between items-center text-[9px] font-black uppercase text-gray-500 italic">
+                            <span>Case: Security Auditing</span>
+                            <span>Savings: $1.2M / Year</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Architecture -->
+    <section id="architecture" class="py-16 md:py-24 px-4 md:px-6 bg-rover-yellow border-b-8 border-black">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl md:text-7xl font-black mb-12 tracking-tighter italic uppercase">ARCHITECTURE</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-rover-yellow p-8 brutalist-card">
+                    <div class="text-rover-orange text-[10px] font-black uppercase mb-2">01. INGESTION</div>
+                    <h3 class="text-2xl font-black italic uppercase mb-4">No Data Moving</h3>
+                    <p class="font-bold text-sm leading-tight">Rover sits on top of your existing S3/GCS/Azure buckets. No indexing pipelines to break. No double storage costs.</p>
+                </div>
+                <div class="bg-black text-white p-8 brutalist-card">
+                    <div class="text-rover-yellow text-[10px] font-black uppercase mb-2">02. EXECUTION</div>
+                    <h3 class="text-2xl font-black italic uppercase mb-4">Massively Parallel</h3>
+                    <p class="font-bold text-sm leading-tight text-gray-400">Queries are split across thousands of transient workers. Zero-bottleneck result aggregation for sub-second responses.</p>
+                </div>
+                <div class="bg-rover-orange p-8 brutalist-card">
+                    <div class="text-black text-[10px] font-black uppercase mb-2">03. OUTPUT</div>
+                    <h3 class="text-2xl font-black italic uppercase mb-4">Standard Interfaces</h3>
+                    <p class="font-bold text-sm leading-tight">Native SQL, JDBC/ODBC, and REST API support. Integrates with Grafana, Tableau, or your custom SIEM.</p>
+                </div>
+            </div>
+        </br></br>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 font-mono text-[10px] md:text-xs font-black uppercase italic pb-10">
+                <div class="border-l-4 border-black pl-3">
+                    <div class="text-rover-orange">Paradigm</div>
+                    <div>Zero-Copy_Architecture</div>
+                </div>
+                <div class="border-l-4 border-black pl-3">
+                    <div class="text-rover-orange">Performance</div>
+                    <div>100x_Latency_Gain</div>
+                </div>
+                <div class="border-l-4 border-black pl-3">
+                    <div class="text-rover-orange">Retrieval</div>
+                    <div>Surgical_Byte-Range</div>
+                </div>
+                <div class="border-l-4 border-black pl-3">
+                    <div class="text-rover-orange">Economics</div>
+                    <div>100x_Cost_Efficiency</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- MINIMAL SINGLE LINE CONTACT FOOTER -->
+    <footer class="w-full border-t-4 border-black pt-6 pb-6 text-center">
+        <p class="font-black uppercase tracking-tight text-sm md:text-base">
+            Contact for early bird offers at 
+            <a href="mailto:contactus@roverhq.io" class="inline-block ml-1 bg-black text-rover-yellow px-3 py-1 hover:bg-rover-orange hover:text-black transition-all transform hover:scale-105">
+                contactus@roverhq.io
+            </a>
+        </p>
+    </footer>
+    <!-- Footer -->
+    <footer class="bg-black text-white ">
+        <div class="max-w-7xl mx-auto text-center">
+            <div class="mt-20 pt-10 border-t border-white/10 flex flex-col md:flex-row justify-between items-center text-[10px] font-bold uppercase tracking-widest text-gray-500">
+                <div>© 2024 Rover HQ Inc. All Rights Reserved.</div>
+                <div class="flex gap-8 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-rover-orange transition-colors">Privacy</a>
+                    <a href="#" class="hover:text-rover-orange transition-colors">Terms</a>
+                    <a href="#" class="hover:text-rover-orange transition-colors">Status</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const useCaseData = [
+            {
+                industry: "Banking & Financial Services",
+                useCase: "Fraud detection and account takeover monitoring",
+                tco: "$100K–$500K/month",
+                performanceDiff: "1-2 sec (vs 2–8 sec)",
+                impact: "Reduces fraud losses and improves compliance",
+                sampleData: "Failed logins, MFA failures, card transactions, IP changes",
+                dailySize: "1–5 TB/day",
+                sampleQuery: "index=banking (event_type=failed_login OR event_type=beneficiary_change) | stats count by customer_id, src_ip, device_id",
+                sources: "Core banking systems, IAM logs, ATM logs, payment gateways"
+            },
+            {
+                industry: "Insurance",
+                useCase: "Claims fraud analytics",
+                tco: "$100K–$300K/month",
+                performanceDiff: "1.5-2.5 sec (vs 3–10 sec)",
+                impact: "Detects fake claims and suspicious adjuster activity",
+                sampleData: "Claim IDs, claimant names, policy IDs, payment amounts",
+                dailySize: "500 GB–2 TB/day",
+                sampleQuery: "index=insurance sourcetype=claims amount>50000 | stats count sum(amount) by claimant_id, adjuster_id",
+                sources: "Claims systems, CRM, payment systems, policy databases"
+            },
+            {
+                industry: "Healthcare",
+                useCase: "Patient record access monitoring",
+                tco: "$80K–$200K/month",
+                performanceDiff: "1-2 sec (vs 2–7 sec)",
+                impact: "Prevents unauthorized access and supports HIPAA compliance",
+                sampleData: "User IDs, patient IDs, EHR access logs, audit trails",
+                dailySize: "300 GB–1.5 TB/day",
+                sampleQuery: "index=healthcare sourcetype=ehr_access | stats count by user_id, patient_id, access_type",
+                sources: "EHR systems, IAM logs, audit logs, SIEM"
+            },
+            {
+                industry: "E-commerce & Retail",
+                useCase: "Real-time inventory and supply chain observability",
+                tco: "$120K–$400K/month",
+                performanceDiff: "1.2-2.0 sec (vs 2–6 sec)",
+                impact: "Reduces stockouts and optimizes fulfillment latency",
+                sampleData: "SKU IDs, warehouse locations, timestamp, order status",
+                dailySize: "1–8 TB/day",
+                sampleQuery: "index=inventory status=out_of_stock | stats count by warehouse_id, category_id",
+                sources: "ERP systems, warehouse IoT, logistics logs"
+            },
+            {
+                industry: "Generative AI",
+                useCase: "LLM inference performance and prompt security",
+                tco: "$100K–$1M/month",
+                performanceDiff: "1-2 sec (vs 1–6 sec)",
+                impact: "Tracks LLM costs and detects prompt injection attacks",
+                sampleData: "Prompt text, token counts, latency, user IDs",
+                dailySize: "500 GB–10 TB/day",
+                sampleQuery: "index=llm (latency_ms>5000 OR prompt_injection=true) | stats avg(latency_ms), sum(token_count) by model_name, user_id",
+                sources: "API gateways, inference logs, OpenTelemetry, cloud billing logs"
+            },
+            {
+                industry: "Travel & Hospitality",
+                useCase: "Booking fraud and customer journey monitoring",
+                tco: "$90K–$300K/month",
+                performanceDiff: "1.5-2.5 sec (vs 2–8 sec)",
+                impact: "Detects fake bookings and abandoned journeys",
+                sampleData: "Booking IDs, payment failures, cancellation rates",
+                dailySize: "500 GB–4 TB/day",
+                sampleQuery: "index=travel booking_status=cancelled OR payment_status=failed | stats count by destination, payment_method, source_ip",
+                sources: "Booking engines, payment gateways, CRM, loyalty systems"
+            },
+            {
+                industry: "Automotive",
+                useCase: "Connected car telemetry and predictive maintenance",
+                tco: "$100K–$500K/month",
+                performanceDiff: "1.5-2.0 sec (vs 2–7 sec)",
+                impact: "Detects vehicle failures and software crashes",
+                sampleData: "Vehicle sensor data, firmware version, battery health",
+                dailySize: "1–10 TB/day",
+                sampleQuery: "index=connected_car battery_health<20 OR crash_detected=true | stats count avg(battery_health) by model, firmware_version",
+                sources: "Vehicle telemetry, IoT gateways, dealer systems"
+            },
+            {
+                industry: "Autonomous Vehicles",
+                useCase: "Sensor fusion monitoring and edge AI observability",
+                tco: "$150K–$800K/month",
+                performanceDiff: "1.8-3.0 sec (vs 5–50 sec)",
+                impact: "Improves safety by identifying sensor failures",
+                sampleData: "LiDAR events, camera telemetry, radar logs",
+                dailySize: "5–50 TB/day",
+                sampleQuery: "index=av sensor_status=fail | stats count by vehicle_id, sensor_type",
+                sources: "Vehicle logs, edge compute nodes, cloud storage"
+            }
+        ];
+
+        let currentPage = 0;
+        const recordsPerPage = 3;
+        const queryCache = {};
+
+        function renderUseCases() {
+            const list = document.getElementById('records-list');
+            const start = currentPage * recordsPerPage;
+            const end = start + recordsPerPage;
+            const currentData = useCaseData.slice(start, end);
+            
+            list.innerHTML = currentData.map((item, index) => {
+                const globalIndex = start + index;
+                const cached = queryCache[globalIndex];
+                
+                return `
+                <div class="p-6 md:p-8">
+                    <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+                        <div class="flex-1">
+                            <span class="bg-black text-white text-[10px] px-2 py-1 uppercase font-black italic mb-2 inline-block">${item.industry}</span>
+                            <h3 class="text-2xl md:text-3xl font-bold italic tracking-tight mb-2 leading-none uppercase">${item.useCase}</h3>
+                            <div class="flex flex-wrap gap-x-6 gap-y-2 mt-4 font-bold text-xs uppercase text-gray-500 italic">
+                                <div><span class="text-black">Rover TCO:</span> ${item.tco}</div>
+                                <div><span class="text-black">Perf:</span> ${item.performanceDiff}</div>
+                            </div>
+                        </div>
+                        <button onclick="toggleDetails(${globalIndex})" class="bg-black text-white px-6 py-3 font-bold uppercase italic text-xs brutalist-card hover:bg-rover-orange hover:text-black transition-all">
+                            View_Details_++
+                        </button>
+                    </div>
+
+                    <div id="details-${globalIndex}" class="expandable-content">
+                        <div class="pt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 border-t border-black/10 mt-8">
+                            <div>
+                                <h4 class="text-[10px] font-black uppercase text-rover-orange mb-2">Business Impact</h4>
+                                <p class="text-sm font-bold leading-tight">${item.impact}</p>
+                            </div>
+                            <div>
+                                <h4 class="text-[10px] font-black uppercase text-rover-orange mb-2">Sample Data & Sources</h4>
+                                <p class="text-sm font-bold leading-tight mb-2 italic text-gray-600">${item.sampleData}</p>
+                                <p class="text-[10px] font-mono text-gray-400 uppercase">${item.sources}</p>
+                            </div>
+                            <div>
+                                <h4 class="text-[10px] font-black uppercase text-rover-orange mb-2">Daily Data Volume</h4>
+                                <p class="text-sm font-bold leading-tight">${item.dailySize}</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8 bg-black text-rover-yellow p-6 font-mono text-[11px] leading-relaxed relative overflow-hidden group">
+                            <div class="absolute top-2 right-4 text-[8px] uppercase text-white/20 font-bold italic">Generated_SQL_Sample</div>
+                            <div class="flex items-start gap-4">
+                                <div class="flex-1">
+                                    <span class="text-white/50 select-none mr-2">rover_sql></span> ${item.sampleQuery}
+                                </div>
+                                <button onclick="executeUseCaseQuery(${globalIndex})" id="exec-btn-${globalIndex}" class="bg-rover-orange text-black px-4 py-1 text-[10px] font-black uppercase italic shadow-[3px_3px_0px_white] active:shadow-none hover:bg-white transition-all whitespace-nowrap">
+                                    Execute Query
+                                </button>
+                            </div>
+                            
+                            <div id="results-container-${globalIndex}" class="mt-6 pt-6 border-t border-white/10 ${cached ? '' : 'hidden'}">
+                                <div id="loading-bar-${globalIndex}" class="h-1 bg-white/10 mb-4 hidden relative overflow-hidden">
+                                    <div class="scan-animation absolute inset-0 w-full h-full"></div>
+                                </div>
+                                <div id="results-data-${globalIndex}" class="grid grid-cols-2 md:grid-cols-4 gap-4 text-white font-bold uppercase tracking-tighter">
+                                    <div>Rows: <span class="text-rover-yellow" id="rows-${globalIndex}">${cached ? cached.rows : '-'}</span></div>
+                                    <div>Latency: <span class="text-rover-yellow" id="lat-${globalIndex}">${cached ? cached.latency : '-'}</span>s</div>
+                                    <div>Scanned: <span class="text-rover-yellow" id="scan-${globalIndex}">${cached ? cached.scanned : '-'}</span>TB</div>
+                                    <div>TCO: <span class="text-rover-yellow" id="tco-${globalIndex}">${cached ? cached.tco : '-'}</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;}).join('');
+            updatePagination();
+        }
+
+        async function executeUseCaseQuery(idx) {
+            const container = document.getElementById(`results-container-${idx}`);
+            const loading = document.getElementById(`loading-bar-${idx}`);
+            const btn = document.getElementById(`exec-btn-${idx}`);
+            
+            container.classList.remove('hidden');
+            loading.classList.remove('hidden');
+            btn.innerText = "Scanning...";
+            btn.disabled = true;
+
+            await new Promise(r => setTimeout(r, 1200));
+
+            let results;
+            if (queryCache[idx]) {
+                results = queryCache[idx];
+            } else {
+                const baseLatency = useCaseData[idx].performanceDiff.split('-')[0].trim();
+                const latency = (parseFloat(baseLatency) + (Math.random() * 0.4)).toFixed(2);
+                const rows = (2503 + Math.floor(Math.random() * 100)).toLocaleString();
+                const scanned = (0.9 + (Math.random() * 0.1)).toFixed(1);
+                const tco = "$0.01";
+                results = { rows, latency, scanned, tco };
+                queryCache[idx] = results;
+            }
+
+            document.getElementById(`rows-${idx}`).innerText = results.rows;
+            document.getElementById(`lat-${idx}`).innerText = results.latency;
+            document.getElementById(`scan-${idx}`).innerText = results.scanned;
+            document.getElementById(`tco-${idx}`).innerText = results.tco;
+
+            loading.classList.add('hidden');
+            btn.innerText = "Query Success";
+            btn.classList.replace('bg-rover-orange', 'bg-green-500');
+            
+            setTimeout(() => {
+                btn.innerText = "Execute Query";
+                btn.classList.replace('bg-green-500', 'bg-rover-orange');
+                btn.disabled = false;
+            }, 3000);
+        }
+
+        function toggleDetails(index) {
+            document.getElementById(`details-${index}`).classList.toggle('open');
+        }
+
+        function updatePagination() {
+            const totalPages = Math.ceil(useCaseData.length / recordsPerPage);
+            document.getElementById('page-indicator').innerText = `PAGE ${currentPage + 1} OF ${totalPages}`;
+            document.getElementById('prev-btn').disabled = currentPage === 0;
+            document.getElementById('next-btn').disabled = currentPage >= totalPages - 1;
+        }
+
+        function nextPage() {
+            if (currentPage < Math.ceil(useCaseData.length / recordsPerPage) - 1) {
+                currentPage++;
+                renderUseCases();
+                document.getElementById('competitors').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function prevPage() {
+            if (currentPage > 0) {
+                currentPage--;
+                renderUseCases();
+                document.getElementById('competitors').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        let selectedSize = 1;
+        function setSize(size) {
+            selectedSize = size;
+            document.querySelectorAll('.terminal-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById('size-' + size).classList.add('active');
+            document.getElementById('est-time').innerText = (0.3 + (Math.log10(size) * 0.2)).toFixed(1);
+            document.getElementById('results-meta').classList.add('hidden');
+        }
+
+        function setQuery(text) {
+            document.getElementById('query-input').innerText = text;
+            document.getElementById('results-meta').classList.add('hidden');
+        }
+
+        async function runQuery() {
+            const overlay = document.getElementById('loading-overlay');
+            const meta = document.getElementById('results-meta');
+            const runBtn = document.getElementById('run-btn');
+            overlay.classList.remove('hidden');
+            runBtn.disabled = true;
+            meta.classList.add('hidden');
+            await new Promise(r => setTimeout(r, 600 + (selectedSize * 15)));
+            document.getElementById('res-rows').innerText = (2466 + Math.floor(Math.random() * 100)).toLocaleString();
+            document.getElementById('res-time').innerText = (parseFloat(document.getElementById('est-time').innerText) + (Math.random() * 0.15)).toFixed(2);
+            document.getElementById('res-scanned').innerText = (selectedSize * 0.9).toFixed(1) + 'TB';
+            document.getElementById('res-cost').innerText = '$' + (selectedSize * 0.01).toFixed(2);
+            overlay.classList.add('hidden');
+            meta.classList.remove('hidden');
+            runBtn.disabled = false;
+        }
+
+        window.onload = () => {
+            setSize(1);
+            renderUseCases();
+        };
+    </script>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-VEBTYNJ650"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-VEBTYNJ650');
+        </script>
 </body>
-
 </html>
