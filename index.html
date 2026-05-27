@@ -4,21 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Rover | SIEM and Search for Security Data Lakes</title>
-    <meta name="description" content="Rover is a SIEM and search platform for security teams that need fast investigations across cloud, identity, endpoint, application, and archive logs without moving every byte into a legacy index.">
-    <meta name="keywords" content="Rover SIEM, security search, log search, data lake SIEM, security analytics, threat hunting, cloud security logs, SOC search, Splunk alternative, Elasticsearch alternative">
+    <title>Rover | Agentic SIEM with S3-Native Search</title>
+    <meta name="description" content="Rover is an Agentic SIEM for machine-speed attacks: adaptive detections, signals-to-cases investigation, agent-assisted SecOps, fast search, and S3-hosted indices over retained security telemetry.">
+    <meta name="keywords" content="Agentic SIEM, Agentic SecOps, Rover SIEM, S3 SIEM, S3 indices, adaptive detections, signals to cases, security search, SIEM cost reduction, autonomous triage, detection engineering, threat hunting">
     <link rel="canonical" href="https://roverhq.io/">
 
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://roverhq.io/">
-    <meta property="og:title" content="Rover | SIEM and Search">
-    <meta property="og:description" content="Search, investigate, and retain security telemetry across your data lake from one SIEM workspace.">
+    <meta property="og:title" content="Rover | Agentic SIEM">
+    <meta property="og:description" content="Agentic SIEM first. Signals become cases. Agents search S3-hosted indices to investigate attacks at machine speed.">
     <meta property="og:image" content="https://roverhq.io/og-image.png">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://roverhq.io/">
-    <meta name="twitter:title" content="Rover | SIEM and Search">
-    <meta name="twitter:description" content="A security data lake SIEM with fast search, long retention, and analyst-first investigations.">
+    <meta name="twitter:title" content="Rover | Agentic SIEM">
+    <meta name="twitter:description" content="Adaptive detections, agentic cases, fast search, and S3-hosted indices for lower-cost security analytics.">
 
     <script type="application/ld+json">
     {
@@ -27,7 +27,7 @@
         "name": "Rover",
         "operatingSystem": "Cloud-native",
         "applicationCategory": "SecurityApplication",
-        "description": "SIEM and search platform for security data lakes, threat hunting, incident investigation, and long-retention log analytics.",
+        "description": "Agentic SIEM with adaptive detections, signals-to-cases investigation, agent-assisted SecOps, S3-native search, S3-hosted indices, autonomous triage, and incident response readiness.",
         "offers": {
             "@type": "Offer",
             "priceCurrency": "USD",
@@ -50,14 +50,15 @@
             --primary: oklch(0.79 0.16 89);
             --primary-soft: oklch(0.88 0.1 92);
             --secondary: oklch(0.7 0.15 340);
+            --cyan: oklch(0.78 0.12 205);
+            --green: oklch(0.74 0.18 145);
+            --warning: oklch(0.76 0.16 64);
+            --danger: oklch(0.6 0.2 25);
             --dark: oklch(0.13 0.01 70);
             --dark-panel: oklch(0.17 0.01 70);
             --dark-muted: oklch(0.18 0.01 70);
             --dark-line: oklch(0.35 0.02 75);
             --border: oklch(0.2 0.01 60);
-            --success: oklch(0.74 0.18 145);
-            --warning: oklch(0.76 0.16 64);
-            --danger: oklch(0.6 0.2 25);
             --shadow: 8px 8px 0 var(--border);
             --max: 1180px;
         }
@@ -82,13 +83,12 @@
             content: "";
             position: fixed;
             inset: 0;
-            z-index: -1;
+            z-index: -2;
             pointer-events: none;
             background:
-                linear-gradient(rgba(40, 37, 30, 0.055) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(40, 37, 30, 0.045) 1px, transparent 1px);
+                linear-gradient(rgba(40, 37, 30, 0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(40, 37, 30, 0.05) 1px, transparent 1px);
             background-size: 40px 40px;
-            mask-image: linear-gradient(to bottom, black, transparent 78%);
         }
 
         a {
@@ -113,9 +113,9 @@
         .nav {
             position: sticky;
             top: 0;
-            z-index: 50;
-            background: color-mix(in oklch, var(--background) 88%, white);
+            z-index: 80;
             border-bottom: 2px solid var(--border);
+            background: color-mix(in oklch, var(--background) 90%, white);
             backdrop-filter: blur(14px);
         }
 
@@ -124,7 +124,7 @@
             align-items: center;
             justify-content: space-between;
             min-height: 72px;
-            gap: 20px;
+            gap: 18px;
         }
 
         .brand {
@@ -132,8 +132,8 @@
             align-items: center;
             gap: 10px;
             font-weight: 700;
-            letter-spacing: -0.03em;
             text-transform: uppercase;
+            white-space: nowrap;
         }
 
         .brand-mark {
@@ -141,11 +141,10 @@
             place-items: center;
             width: 36px;
             height: 36px;
-            color: var(--foreground);
-            background: var(--primary);
             border: 2px solid var(--border);
+            background: var(--primary);
             box-shadow: 4px 4px 0 var(--border);
-            font-weight: 700;
+            color: var(--foreground);
         }
 
         .nav-links {
@@ -173,7 +172,6 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
             min-height: 42px;
             padding: 0 18px;
             border: 2px solid var(--border);
@@ -218,112 +216,68 @@
             font-size: 12px;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.06em;
         }
 
         .eyebrow::before {
             content: "";
             width: 8px;
             height: 8px;
-            background: var(--secondary);
             border: 2px solid var(--border);
+            background: var(--secondary);
         }
 
         .hero {
-            padding: 54px 0 34px;
-            border-bottom: 2px solid var(--border);
-        }
-
-        .hero-grid {
-            display: grid;
-            grid-template-columns: minmax(0, 0.95fr) minmax(420px, 1.05fr);
-            align-items: center;
-            gap: 42px;
-        }
-
-        .hero-grid > *,
-        .section-head > *,
-        .split > *,
-        .cta-box > * {
-            min-width: 0;
-        }
-
-        h1,
-        h2,
-        h3,
-        p {
-            margin: 0;
-        }
-
-        h1 {
-            max-width: 760px;
-            margin-top: 22px;
-            font-size: clamp(58px, 9vw, 124px);
-            line-height: 0.86;
-            letter-spacing: -0.075em;
-            text-transform: uppercase;
-        }
-
-        .hero-copy {
-            max-width: 680px;
-            margin-top: 26px;
-            color: var(--muted-foreground);
-            font-size: clamp(20px, 2.2vw, 30px);
-            font-weight: 600;
-            line-height: 1.08;
-            letter-spacing: -0.035em;
-        }
-
-        .hero-copy strong {
-            color: var(--foreground);
-        }
-
-        .hero-actions {
+            position: relative;
             display: flex;
-            flex-wrap: wrap;
-            gap: 14px;
-            margin-top: 34px;
-        }
-
-        .hero-proof {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 10px;
-            margin-top: 34px;
-            max-width: 650px;
-        }
-
-        .proof-item {
-            border-left: 4px solid var(--border);
-            padding-left: 12px;
-        }
-
-        .proof-item span {
-            display: block;
-            color: var(--muted-foreground);
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-
-        .proof-item strong {
-            display: block;
-            margin-top: 4px;
-            font-size: 20px;
-            letter-spacing: -0.05em;
-            text-transform: uppercase;
-        }
-
-        .console {
-            min-width: 0;
-            border: 2px solid var(--border);
-            background: var(--dark);
-            color: var(--background);
-            box-shadow: var(--shadow);
+            flex-direction: column;
+            min-height: 760px;
+            isolation: isolate;
+            border-bottom: 2px solid var(--border);
             overflow: hidden;
         }
 
-        .console-top {
+        .hero > .shell {
+            order: 1;
+        }
+
+        .hero-scene {
+            position: absolute;
+            inset: 0;
+            order: 2;
+            z-index: -1;
+            background:
+                linear-gradient(90deg, color-mix(in oklch, var(--background) 96%, transparent), color-mix(in oklch, var(--background) 70%, transparent) 44%, color-mix(in oklch, var(--background) 35%, transparent)),
+                linear-gradient(rgba(40, 37, 30, 0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(40, 37, 30, 0.05) 1px, transparent 1px);
+            background-size: auto, 40px 40px, 40px 40px;
+        }
+
+        .agent-map {
+            position: absolute;
+            top: 68px;
+            right: max(20px, calc((100vw - var(--max)) / 2));
+            width: 590px;
+            height: 500px;
+            border: 2px solid var(--border);
+            background: var(--dark);
+            color: var(--background);
+            box-shadow: 10px 10px 0 var(--border);
+            overflow: hidden;
+        }
+
+        .agent-map::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(rgba(245, 241, 224, 0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(245, 241, 224, 0.07) 1px, transparent 1px);
+            background-size: 36px 36px;
+        }
+
+        .map-top {
+            position: relative;
+            z-index: 2;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -358,158 +312,267 @@
             background: var(--muted-foreground);
         }
 
-        .query-panel {
-            padding: 18px;
-        }
-
-        .query-label {
-            color: var(--primary);
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        .query-box {
-            margin-top: 10px;
-            border: 1px solid var(--dark-line);
-            background: oklch(0.1 0.01 70);
-            padding: 14px;
-            color: var(--background);
-            font-size: 13px;
-            line-height: 1.55;
-            min-height: 106px;
-            overflow-wrap: anywhere;
-        }
-
-        .query-box .keyword {
-            color: var(--primary);
-        }
-
-        .query-box .value {
-            color: var(--secondary);
-        }
-
-        .query-tabs {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 14px;
-        }
-
-        .query-tab {
-            border: 1px solid var(--dark-line);
-            background: var(--dark-panel);
-            color: color-mix(in oklch, var(--background) 70%, transparent);
-            padding: 8px 9px;
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            cursor: pointer;
-        }
-
-        .query-tab.active,
-        .query-tab:hover {
-            border-color: var(--primary);
-            color: var(--dark);
-            background: var(--primary);
-        }
-
-        .signal-grid {
+        .scene-stage {
+            position: absolute;
+            z-index: 3;
+            inset: 72px 22px 24px;
             display: grid;
-            grid-template-columns: 0.9fr 1.1fr;
-            gap: 0;
-            border-top: 2px solid var(--dark-line);
-        }
-
-        .signal-list,
-        .signal-chart {
-            padding: 18px;
-        }
-
-        .signal-list {
-            border-right: 2px solid var(--dark-line);
-            background: var(--dark-panel);
-        }
-
-        .signal-row {
-            display: grid;
-            grid-template-columns: 10px minmax(0, 1fr) auto;
-            gap: 10px;
+            grid-template-columns: 136px minmax(0, 1fr) 144px;
             align-items: center;
-            padding: 10px 0;
-            border-bottom: 1px solid var(--dark-line);
+            gap: 14px;
+        }
+
+        .scene-rail {
+            display: grid;
+            gap: 10px;
+        }
+
+        .scene-label,
+        .case-meta span,
+        .case-pill,
+        .case-thread span {
+            display: block;
+            color: var(--primary);
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .scene-pill {
+            border: 1px solid var(--dark-line);
+            background: var(--dark-panel);
+            padding: 11px;
+            color: var(--background);
             font-size: 12px;
+            font-weight: 700;
+            line-height: 1.05;
+            text-transform: uppercase;
         }
 
-        .signal-row:last-child {
-            border-bottom: 0;
+        .scene-pill.accent {
+            border-color: color-mix(in oklch, var(--secondary) 72%, var(--dark-line));
         }
 
-        .severity {
-            width: 10px;
-            height: 10px;
+        .scene-pill.s3 {
+            border-color: color-mix(in oklch, var(--primary) 82%, var(--dark-line));
+        }
+
+        .scene-pill small {
+            display: block;
+            margin-top: 6px;
+            color: color-mix(in oklch, var(--background) 52%, transparent);
+            font-size: 10px;
+            line-height: 1.25;
+        }
+
+        .scene-pill strong {
+            display: block;
+            margin-top: 8px;
+            color: var(--background);
+            font-size: 24px;
+            line-height: 0.95;
+            text-transform: uppercase;
+        }
+
+        .case-focus {
+            position: relative;
+            min-width: 0;
+            min-height: 328px;
+            border: 2px solid var(--primary);
+            background: oklch(0.1 0.01 70);
+            box-shadow: 8px 8px 0 oklch(0.08 0.01 70);
+            padding: 18px;
+        }
+
+        .case-focus::before,
+        .case-focus::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 22px;
+            height: 2px;
             background: var(--primary);
         }
 
-        .severity.high {
-            background: var(--danger);
+        .case-focus::before {
+            left: -24px;
         }
 
-        .severity.med {
-            background: var(--warning);
+        .case-focus::after {
+            right: -24px;
         }
 
-        .signal-row b {
-            display: block;
-            overflow: hidden;
-            text-overflow: ellipsis;
+        .case-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .case-meta em {
+            color: var(--primary);
+            font-style: normal;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
             white-space: nowrap;
         }
 
-        .signal-row span {
-            color: color-mix(in oklch, var(--background) 55%, transparent);
-            font-size: 11px;
+        .case-title {
+            display: block;
+            margin-top: 36px;
+            color: var(--background);
+            font-size: 38px;
+            line-height: 0.92;
+            text-transform: uppercase;
         }
 
-        .mini-metric {
-            color: var(--primary);
+        .case-summary {
+            max-width: 320px;
+            margin-top: 14px;
+            color: color-mix(in oklch, var(--background) 62%, transparent);
+            font-size: 13px;
+            font-weight: 700;
+            line-height: 1.32;
+        }
+
+        .case-thread {
+            display: grid;
+            margin-top: 26px;
+            border: 1px solid var(--dark-line);
+            background: oklch(0.08 0.01 70);
+        }
+
+        .thread-row {
+            display: grid;
+            grid-template-columns: 44px minmax(0, 1fr);
+            gap: 10px;
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--dark-line);
+        }
+
+        .thread-row:last-child {
+            border-bottom: 0;
+        }
+
+        .thread-row strong {
+            display: block;
+            color: var(--background);
+            font-size: 12px;
+            line-height: 1.1;
+            text-transform: uppercase;
+        }
+
+        .thread-row em {
+            display: block;
+            margin-top: 3px;
+            color: color-mix(in oklch, var(--background) 48%, transparent);
+            font-style: normal;
+            font-size: 10px;
+            line-height: 1.25;
+        }
+
+        .source-rail .scene-pill:first-of-type {
+            min-height: 132px;
+        }
+
+        .source-rail .scene-pill strong {
+            font-size: 28px;
+        }
+
+        .source-rail .case-pill {
+            color: var(--secondary);
+        }
+
+        .scan-band {
+            position: absolute;
+            z-index: 1;
+            inset: 48px 0 0;
+            width: 130px;
+            background: linear-gradient(90deg, transparent, color-mix(in oklch, var(--primary) 16%, transparent), transparent);
+            animation: sweep 5s linear infinite;
+        }
+
+        @keyframes sweep {
+            from {
+                transform: translateX(-160px);
+            }
+            to {
+                transform: translateX(720px);
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            width: min(540px, 100%);
+            padding-top: 56px;
+            padding-bottom: 36px;
+        }
+
+        h1,
+        h2,
+        h3,
+        p {
+            margin: 0;
+        }
+
+        h1 {
+            margin-top: 26px;
+            font-size: 116px;
+            line-height: 0.86;
+            letter-spacing: 0;
+            text-transform: uppercase;
+        }
+
+        .hero-copy {
+            max-width: 540px;
+            margin-top: 28px;
+            color: var(--muted-foreground);
+            font-size: 30px;
+            font-weight: 600;
+            line-height: 1.08;
+            letter-spacing: 0;
+        }
+
+        .hero-copy strong {
+            color: var(--foreground);
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 34px;
+        }
+
+        .hero-proof {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+            max-width: 540px;
+            margin-top: 34px;
+        }
+
+        .proof-item {
+            border-left: 4px solid var(--border);
+            padding-left: 12px;
+        }
+
+        .proof-item span {
+            display: block;
+            color: var(--muted-foreground);
             font-size: 11px;
             font-weight: 700;
+            text-transform: uppercase;
         }
 
-        .bar-stack {
-            display: grid;
-            gap: 9px;
-            margin-top: 15px;
-        }
-
-        .bar {
-            display: grid;
-            grid-template-columns: 62px 1fr 42px;
-            align-items: center;
-            gap: 10px;
-            color: color-mix(in oklch, var(--background) 72%, transparent);
-            font-size: 11px;
-        }
-
-        .bar-track {
-            height: 13px;
-            border: 1px solid var(--dark-line);
-            background: var(--dark-muted);
-        }
-
-        .bar-fill {
-            height: 100%;
-            background: var(--primary);
-        }
-
-        .bar:nth-child(2) .bar-fill {
-            background: var(--secondary);
-        }
-
-        .bar:nth-child(3) .bar-fill {
-            background: var(--warning);
+        .proof-item strong {
+            display: block;
+            margin-top: 4px;
+            font-size: 20px;
+            line-height: 1.05;
+            text-transform: uppercase;
         }
 
         .section {
@@ -524,16 +587,23 @@
 
         .section-head {
             display: grid;
-            grid-template-columns: minmax(0, 0.82fr) minmax(280px, 0.55fr);
+            grid-template-columns: minmax(0, 0.88fr) minmax(280px, 0.52fr);
             gap: 36px;
             align-items: end;
             margin-bottom: 34px;
         }
 
+        .section-head > *,
+        .agent-grid > *,
+        .split > *,
+        .cta-box > * {
+            min-width: 0;
+        }
+
         h2 {
-            font-size: clamp(40px, 6vw, 78px);
-            line-height: 0.92;
-            letter-spacing: -0.065em;
+            font-size: 70px;
+            line-height: 0.94;
+            letter-spacing: 0;
             text-transform: uppercase;
         }
 
@@ -543,7 +613,7 @@
             font-size: 18px;
             font-weight: 600;
             line-height: 1.24;
-            letter-spacing: -0.02em;
+            letter-spacing: 0;
         }
 
         .section.dark .section-head p,
@@ -558,7 +628,7 @@
         }
 
         .card {
-            min-height: 245px;
+            min-height: 260px;
             border: 2px solid var(--border);
             background: var(--card);
             padding: 20px;
@@ -587,8 +657,8 @@
             text-transform: uppercase;
         }
 
-        .dark-card .card-kicker {
-            color: color-mix(in oklch, var(--background) 58%, transparent);
+        .card.featured .card-kicker {
+            color: color-mix(in oklch, var(--foreground) 66%, transparent);
         }
 
         .card-index {
@@ -604,11 +674,13 @@
             margin-top: 24px;
             font-size: 26px;
             line-height: 1;
-            letter-spacing: -0.045em;
+            letter-spacing: 0;
             text-transform: uppercase;
         }
 
-        .card p {
+        .card p,
+        .loop-step p,
+        .use-case p {
             margin-top: 16px;
             color: var(--muted-foreground);
             font-size: 15px;
@@ -620,44 +692,40 @@
             color: color-mix(in oklch, var(--foreground) 74%, transparent);
         }
 
-        .dark-card p {
-            color: color-mix(in oklch, var(--background) 64%, transparent);
-        }
-
         .split {
             display: grid;
-            grid-template-columns: minmax(0, 0.92fr) minmax(360px, 1.08fr);
+            grid-template-columns: minmax(0, 0.8fr) minmax(380px, 1.2fr);
             gap: 26px;
-            align-items: start;
+            align-items: stretch;
         }
 
-        .search-copy {
+        .analytics-copy {
             border: 2px solid var(--border);
             background: var(--primary);
             padding: 28px;
             box-shadow: var(--shadow);
         }
 
-        .search-copy h2 {
-            font-size: clamp(38px, 5vw, 66px);
+        .analytics-copy h2 {
+            margin-top: 24px;
+            font-size: 58px;
         }
 
-        .search-copy p {
+        .analytics-copy p {
             margin-top: 22px;
             color: color-mix(in oklch, var(--foreground) 78%, transparent);
             font-size: 20px;
             font-weight: 700;
-            line-height: 1.14;
-            letter-spacing: -0.03em;
+            line-height: 1.15;
         }
 
-        .search-list {
+        .analytics-list {
             display: grid;
             gap: 12px;
             margin-top: 28px;
         }
 
-        .search-list div {
+        .analytics-list div {
             display: flex;
             justify-content: space-between;
             gap: 16px;
@@ -668,84 +736,131 @@
             text-transform: uppercase;
         }
 
-        .search-list span {
+        .analytics-list span {
             color: color-mix(in oklch, var(--foreground) 58%, transparent);
         }
 
-        .query-workbench {
+        .agent-runner {
             min-width: 0;
             border: 2px solid var(--border);
-            background: var(--card);
+            background: var(--dark);
+            color: var(--background);
             box-shadow: var(--shadow);
             overflow: hidden;
         }
 
-        .workbench-top {
+        .runner-top {
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 12px;
-            border-bottom: 2px solid var(--border);
-            background: var(--foreground);
-            color: var(--background);
+            border-bottom: 2px solid var(--dark-line);
+            background: var(--dark-panel);
             padding: 12px 14px;
             font-size: 12px;
             font-weight: 700;
             text-transform: uppercase;
         }
 
-        .workbench-body {
+        .runner-body {
             padding: 18px;
         }
 
-        .workbench-query {
-            border: 2px solid var(--border);
-            background: var(--background);
-            min-height: 150px;
+        .agent-prompt {
+            border: 1px solid var(--dark-line);
+            background: oklch(0.1 0.01 70);
+            min-height: 136px;
             padding: 16px;
-            color: var(--foreground);
+            color: color-mix(in oklch, var(--background) 86%, transparent);
             font-size: 13px;
             line-height: 1.65;
             overflow-wrap: anywhere;
         }
 
-        .run-row {
+        .agent-prompt .keyword {
+            color: var(--primary);
+        }
+
+        .agent-prompt .value {
+            color: var(--secondary);
+        }
+
+        .runner-actions {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 16px;
+            gap: 14px;
             margin-top: 14px;
         }
 
-        .result-strip {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 10px;
-            margin-top: 16px;
+        .runner-actions .button {
+            border-color: var(--dark-line);
+            box-shadow: 4px 4px 0 var(--dark-line);
         }
 
-        .result {
-            border: 2px solid var(--border);
-            background: var(--muted);
-            padding: 12px;
-        }
-
-        .result span {
-            display: block;
-            color: var(--muted-foreground);
-            font-size: 11px;
+        .runner-status {
+            color: color-mix(in oklch, var(--background) 58%, transparent);
+            font-size: 12px;
             font-weight: 700;
             text-transform: uppercase;
         }
 
-        .result strong {
-            display: block;
-            margin-top: 4px;
-            font-size: 24px;
-            letter-spacing: -0.05em;
+        .timeline {
+            display: grid;
+            gap: 10px;
+            margin-top: 18px;
         }
 
-        .pipeline {
+        .timeline-row {
+            display: grid;
+            grid-template-columns: 24px minmax(0, 1fr) auto;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid var(--dark-line);
+            background: var(--dark-panel);
+            padding: 10px;
+            font-size: 12px;
+        }
+
+        .timeline-row i {
+            display: grid;
+            place-items: center;
+            width: 24px;
+            height: 24px;
+            border: 1px solid var(--dark-line);
+            background: var(--primary);
+            color: var(--dark);
+            font-style: normal;
+            font-weight: 700;
+        }
+
+        .timeline-row strong {
+            display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .timeline-row span {
+            color: color-mix(in oklch, var(--background) 54%, transparent);
+            font-size: 11px;
+        }
+
+        .timeline-row em {
+            color: var(--primary);
+            font-style: normal;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .agent-grid {
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr;
+            gap: 26px;
+            align-items: start;
+        }
+
+        .loop {
             display: grid;
             grid-template-columns: repeat(5, minmax(0, 1fr));
             border: 2px solid var(--border);
@@ -753,38 +868,30 @@
             box-shadow: var(--shadow);
         }
 
-        .pipe-step {
+        .loop-step {
             min-height: 230px;
             padding: 20px;
             border-right: 2px solid var(--border);
         }
 
-        .pipe-step:last-child {
+        .loop-step:last-child {
             border-right: 0;
         }
 
-        .pipe-step:nth-child(even) {
+        .loop-step:nth-child(even) {
             background: var(--muted);
         }
 
-        .pipe-step span {
+        .loop-step span {
             color: var(--secondary);
             font-size: 12px;
             font-weight: 700;
             text-transform: uppercase;
         }
 
-        .pipe-step h3 {
-            margin-top: 40px;
+        .loop-step h3 {
+            margin-top: 38px;
             font-size: 23px;
-        }
-
-        .pipe-step p {
-            margin-top: 14px;
-            color: var(--muted-foreground);
-            font-size: 14px;
-            font-weight: 600;
-            line-height: 1.3;
         }
 
         .compare {
@@ -867,13 +974,6 @@
             margin-top: 28px;
         }
 
-        .use-case p {
-            margin-top: 14px;
-            color: var(--muted-foreground);
-            font-weight: 600;
-            line-height: 1.32;
-        }
-
         .cta {
             padding: 72px 0;
             background: var(--primary);
@@ -906,6 +1006,7 @@
         .signup input {
             min-width: 0;
             flex: 1;
+            min-height: 44px;
             border: 2px solid var(--border);
             background: white;
             color: var(--foreground);
@@ -936,34 +1037,96 @@
             gap: 20px;
         }
 
+        @media (max-width: 1120px) {
+            .hero {
+                min-height: auto;
+            }
+
+            .hero-scene {
+                position: relative;
+                inset: auto;
+                z-index: 1;
+                background:
+                    linear-gradient(rgba(40, 37, 30, 0.06) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(40, 37, 30, 0.05) 1px, transparent 1px);
+                background-size: 40px 40px, 40px 40px;
+            }
+
+            .agent-map {
+                position: relative;
+                inset: auto;
+                width: min(100%, 680px);
+                height: 430px;
+                margin: 0 auto 48px;
+                opacity: 1;
+            }
+
+            .scene-stage {
+                inset: 64px 20px 22px;
+                grid-template-columns: 128px minmax(0, 1fr) 132px;
+                gap: 12px;
+            }
+
+            .case-focus {
+                min-height: 286px;
+                padding: 14px;
+            }
+
+            .case-title {
+                margin-top: 28px;
+                font-size: 32px;
+            }
+
+            .source-rail .scene-pill strong {
+                font-size: 24px;
+            }
+        }
+
         @media (max-width: 980px) {
             .nav-links {
                 display: none;
             }
 
-            .hero-grid,
+            .hero-content {
+                padding-top: 48px;
+                padding-bottom: 34px;
+            }
+
+            h1 {
+                font-size: 84px;
+            }
+
+            .hero-copy {
+                font-size: 25px;
+            }
+
             .section-head,
             .split,
+            .agent-grid,
             .cta-box {
                 grid-template-columns: 1fr;
             }
 
             .cards,
-            .pipeline,
+            .loop,
             .use-cases {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
             }
 
-            .pipe-step:nth-child(2n) {
-                border-right: 0;
-            }
-
-            .pipe-step {
+            .loop-step {
                 border-bottom: 2px solid var(--border);
             }
 
-            .pipe-step:nth-last-child(-n + 1) {
+            .loop-step:nth-child(2n) {
+                border-right: 0;
+            }
+
+            .loop-step:last-child {
                 border-bottom: 0;
+            }
+
+            h2 {
+                font-size: 56px;
             }
         }
 
@@ -981,11 +1144,6 @@
                 display: none;
             }
 
-            .brand-mark {
-                width: 32px;
-                height: 32px;
-            }
-
             .nav-actions .primary {
                 min-height: 38px;
                 padding: 0 12px;
@@ -993,54 +1151,169 @@
                 box-shadow: 3px 3px 0 var(--border);
             }
 
-            .console-top,
-            .workbench-top {
-                font-size: 10px;
-            }
-
-            .hero {
-                padding-top: 36px;
+            .brand-mark {
+                width: 32px;
+                height: 32px;
             }
 
             h1 {
-                font-size: clamp(56px, 18vw, 86px);
+                font-size: 58px;
+            }
+
+            h2,
+            .analytics-copy h2 {
+                font-size: 40px;
+            }
+
+            .hero-copy {
+                font-size: 20px;
             }
 
             .hero-proof,
             .cards,
-            .pipeline,
+            .loop,
             .use-cases,
-            .compare,
-            .result-strip,
-            .signal-grid {
+            .compare {
                 grid-template-columns: 1fr;
             }
 
-            .signal-list,
+            .agent-map {
+                width: min(calc(100% - 22px), 368px);
+                height: 420px;
+                margin-left: 11px;
+                margin-right: 11px;
+                box-shadow: 6px 6px 0 var(--border);
+            }
+
+            .scene-stage {
+                top: 58px;
+                left: 14px;
+                right: 14px;
+                bottom: 14px;
+                grid-template-columns: 1fr;
+                grid-template-rows: auto minmax(0, 1fr) auto;
+                align-items: stretch;
+                gap: 8px;
+            }
+
+            .scene-label {
+                display: none;
+            }
+
+            .scene-rail {
+                grid-template-columns: 1fr;
+                gap: 6px;
+            }
+
+            .scene-pill {
+                padding: 8px;
+                font-size: 10px;
+            }
+
+            .scene-pill small {
+                display: none;
+            }
+
+            .source-rail .scene-pill:first-of-type {
+                min-height: auto;
+            }
+
+            .scene-pill strong,
+            .source-rail .scene-pill strong {
+                margin-top: 5px;
+                font-size: 18px;
+                line-height: 1;
+            }
+
+            .case-focus {
+                min-height: 196px;
+                padding: 12px;
+                box-shadow: 5px 5px 0 oklch(0.08 0.01 70);
+            }
+
+            .case-focus::before,
+            .case-focus::after {
+                display: none;
+            }
+
+            .case-meta {
+                align-items: flex-start;
+            }
+
+            .case-meta em {
+                white-space: normal;
+                text-align: right;
+            }
+
+            .case-title {
+                margin-top: 16px;
+                font-size: 24px;
+                line-height: 0.95;
+            }
+
+            .case-summary {
+                margin-top: 9px;
+                font-size: 11px;
+                line-height: 1.25;
+            }
+
+            .case-thread {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                margin-top: 12px;
+            }
+
+            .thread-row {
+                grid-template-columns: 1fr;
+                gap: 4px;
+                padding: 8px;
+                border-right: 1px solid var(--dark-line);
+                border-bottom: 0;
+            }
+
+            .thread-row:last-child {
+                border-right: 0;
+            }
+
+            .thread-row strong {
+                font-size: 10px;
+            }
+
+            .thread-row em {
+                display: none;
+            }
+
+            .section {
+                padding: 56px 0;
+            }
+
+            .card,
+            .loop-step,
+            .use-case {
+                min-height: auto;
+            }
+
+            .loop-step {
+                border-right: 0;
+            }
+
             .compare-col:first-child {
                 border-right: 0;
                 border-bottom: 2px solid var(--dark-line);
             }
 
-            .card,
-            .pipe-step,
-            .use-case {
-                min-height: auto;
-            }
-
-            .pipe-step {
-                border-right: 0;
-            }
-
-            .run-row,
+            .runner-actions,
             .signup form,
             .footer-inner {
                 align-items: stretch;
                 flex-direction: column;
             }
 
-            .signup input {
-                min-height: 44px;
+            .timeline-row {
+                grid-template-columns: 24px minmax(0, 1fr);
+            }
+
+            .timeline-row em {
+                grid-column: 2;
             }
 
             .footer-links {
@@ -1066,14 +1339,14 @@
             </a>
 
             <div class="nav-links" aria-label="Page sections">
-                <a href="#siem">SIEM</a>
-                <a href="#search">Search</a>
-                <a href="#architecture">Architecture</a>
-                <a href="#use-cases">Use Cases</a>
+                <a href="#siem">Agentic SIEM</a>
+                <a href="#agents">Agentic SecOps</a>
+                <a href="#architecture">S3 Search</a>
+                <a href="#outcomes">Outcomes</a>
             </div>
 
             <div class="nav-actions">
-                <a class="button secondary" href="#search">Try Search</a>
+                <a class="button secondary" href="#architecture">See Search</a>
                 <a class="button primary" href="mailto:contactus@roverhq.io">Get Access</a>
             </div>
         </div>
@@ -1081,12 +1354,73 @@
 
     <main>
         <header class="hero">
-            <div class="shell hero-grid">
-                <div>
-                    <div class="eyebrow mono">Security data lake SIEM</div>
-                    <h1>Rover</h1>
+            <div class="hero-scene" aria-hidden="true">
+                <div class="agent-map">
+                    <div class="scan-band"></div>
+                    <div class="map-top">
+                        <div class="window-dots"><i></i><i></i><i></i></div>
+                        <span class="mono">rover.agentic/siem</span>
+                    </div>
+                    <div class="scene-stage">
+                        <div class="scene-rail signal-rail">
+                            <span class="scene-label mono">Signals</span>
+                            <div class="scene-pill accent">
+                                <span class="case-pill mono">3 detections</span>
+                                <strong>3 signals</strong>
+                                <small>Identity, cloud, endpoint.</small>
+                            </div>
+                        </div>
+
+                        <div class="case-focus">
+                            <div class="case-meta">
+                                <span class="mono">Rover-built case</span>
+                                <em class="mono">P1 / 87%</em>
+                            </div>
+                            <strong class="case-title">Identity takeover case</strong>
+                            <p class="case-summary">The SIEM agent links signals into one attack narrative with cited evidence.</p>
+                            <div class="case-thread">
+                                <div class="thread-row">
+                                    <span class="mono">09:41</span>
+                                    <div>
+                                        <strong>Impossible travel</strong>
+                                        <em>Identity signal</em>
+                                    </div>
+                                </div>
+                                <div class="thread-row">
+                                    <span class="mono">09:46</span>
+                                    <div>
+                                        <strong>Admin token</strong>
+                                        <em>Cloud audit</em>
+                                    </div>
+                                </div>
+                                <div class="thread-row">
+                                    <span class="mono">09:52</span>
+                                    <div>
+                                        <strong>Rare process</strong>
+                                        <em>Endpoint event</em>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="scene-rail source-rail">
+                            <span class="scene-label mono">S3 Search</span>
+                            <div class="scene-pill s3">
+                                <span class="case-pill mono">Evidence</span>
+                                <strong>3 cited sources</strong>
+                                <small>Indices and raw pointers stay in S3.</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="shell">
+                <div class="hero-content">
+                    <div class="eyebrow mono">Agentic SIEM</div>
+                    <h1>Agentic SIEM</h1>
                     <p class="hero-copy">
-                        A SIEM and search workspace for teams that need to <strong>detect, hunt, investigate, and retain</strong> security telemetry without forcing every log into a legacy hot index.
+                        Rover is an <strong>Agentic SIEM</strong> for machine-speed attacks: adaptive detections turn signals into cases, agents investigate with cited evidence, and fast search runs on <strong>S3-hosted indices</strong>.
                     </p>
                     <div class="hero-actions">
                         <a class="button primary" href="mailto:contactus@roverhq.io">Join Waiting List</a>
@@ -1094,162 +1428,103 @@
                     </div>
                     <div class="hero-proof">
                         <div class="proof-item">
-                            <span>Signal</span>
-                            <strong>Cloud + identity</strong>
+                            <span>01 Primary</span>
+                            <strong>Agentic SIEM</strong>
                         </div>
                         <div class="proof-item">
-                            <span>Workflow</span>
-                            <strong>Alert to query</strong>
+                            <span>02 Workflow</span>
+                            <strong>Agentic SecOps</strong>
                         </div>
                         <div class="proof-item">
-                            <span>Retention</span>
-                            <strong>Search archives</strong>
+                            <span>03 Engine</span>
+                            <strong>S3 Search</strong>
                         </div>
                     </div>
                 </div>
-
-                <section class="console" aria-label="Rover product interface preview">
-                    <div class="console-top">
-                        <div class="window-dots" aria-hidden="true"><i></i><i></i><i></i></div>
-                        <span class="mono">rover.siem/search</span>
-                    </div>
-                    <div class="query-panel">
-                        <div class="query-label mono">Threat hunt</div>
-                        <div id="hero-query" class="query-box mono">
-                            <span class="keyword">from</span> identity.signin<br>
-                            <span class="keyword">where</span> user.risk = <span class="value">"high"</span> and mfa.result != <span class="value">"passed"</span><br>
-                            <span class="keyword">join</span> cloud.audit on user.id<br>
-                            <span class="keyword">summarize</span> attempts, countries, services by user.email
-                        </div>
-                        <div class="query-tabs" aria-label="Search examples">
-                            <button class="query-tab active" type="button" data-query="identity">Identity</button>
-                            <button class="query-tab" type="button" data-query="cloud">Cloud</button>
-                            <button class="query-tab" type="button" data-query="endpoint">Endpoint</button>
-                            <button class="query-tab" type="button" data-query="archive">Archive</button>
-                        </div>
-                    </div>
-                    <div class="signal-grid">
-                        <div class="signal-list">
-                            <div class="query-label mono">Correlated alerts</div>
-                            <div class="signal-row">
-                                <i class="severity high"></i>
-                                <div><b>Impossible travel</b><span>identity + vpn</span></div>
-                                <em class="mini-metric mono">P1</em>
-                            </div>
-                            <div class="signal-row">
-                                <i class="severity med"></i>
-                                <div><b>New admin token</b><span>aws cloudtrail</span></div>
-                                <em class="mini-metric mono">P2</em>
-                            </div>
-                            <div class="signal-row">
-                                <i class="severity"></i>
-                                <div><b>Rare process tree</b><span>edr telemetry</span></div>
-                                <em class="mini-metric mono">P3</em>
-                            </div>
-                        </div>
-                        <div class="signal-chart">
-                            <div class="query-label mono">Search coverage</div>
-                            <div class="bar-stack">
-                                <div class="bar mono">
-                                    <span>Hot</span>
-                                    <div class="bar-track"><div class="bar-fill" style="width: 86%"></div></div>
-                                    <b>86%</b>
-                                </div>
-                                <div class="bar mono">
-                                    <span>Warm</span>
-                                    <div class="bar-track"><div class="bar-fill" style="width: 71%"></div></div>
-                                    <b>71%</b>
-                                </div>
-                                <div class="bar mono">
-                                    <span>Cold</span>
-                                    <div class="bar-track"><div class="bar-fill" style="width: 93%"></div></div>
-                                    <b>93%</b>
-                                </div>
-                                <div class="bar mono">
-                                    <span>Cases</span>
-                                    <div class="bar-track"><div class="bar-fill" style="width: 64%"></div></div>
-                                    <b>64%</b>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
             </div>
         </header>
 
         <section id="siem" class="section">
             <div class="shell">
                 <div class="section-head">
-                    <h2>SIEM built around search.</h2>
-                    <p>Rover gives analysts one place to triage detections, pivot into raw evidence, and keep years of telemetry searchable in the same workflow.</p>
+                    <h2>Agentic SIEM for attacks that move at machine speed.</h2>
+                    <p>Rover keeps the SIEM jobs: detection, investigation, audit, and response. The change is architectural: detections produce signals, agents assemble cases, and searchable S3 memory gives every conclusion evidence.</p>
                 </div>
 
                 <div class="cards">
                     <article class="card featured">
-                        <div class="card-kicker"><span>Detect</span><span class="card-index mono">01</span></div>
-                        <h3>Correlate security signals</h3>
-                        <p>Connect identity, cloud, endpoint, network, application, and SaaS events into rules that keep context attached to every alert.</p>
+                        <div class="card-kicker"><span>SIEM</span><span class="card-index mono">01</span></div>
+                        <h3>Reason about attack narratives</h3>
+                        <p>Rover correlates activity across identity, cloud, endpoint, application, and audit sources so multi-step attacks are treated as stories, not isolated alerts.</p>
                     </article>
                     <article class="card">
-                        <div class="card-kicker"><span>Hunt</span><span class="card-index mono">02</span></div>
-                        <h3>Ask better questions</h3>
-                        <p>Run structured searches across normalized fields and raw events so investigations do not stop when the data source changes.</p>
+                        <div class="card-kicker"><span>Cases</span><span class="card-index mono">02</span></div>
+                        <h3>Turn signals into cases</h3>
+                        <p>Agents group related signals, build timelines, cite source events, score severity, and produce a case an analyst can accept or challenge.</p>
                     </article>
                     <article class="card">
-                        <div class="card-kicker"><span>Investigate</span><span class="card-index mono">03</span></div>
-                        <h3>Move from alert to evidence</h3>
-                        <p>Open a case, inspect timelines, pivot by user, IP, host, process, service, or cloud account, then preserve the query trail.</p>
+                        <div class="card-kicker"><span>Detection</span><span class="card-index mono">03</span></div>
+                        <h3>Adapt detections to your environment</h3>
+                        <p>Generic rules are only the starting point. Rover learns entities, baselines, assets, and source coverage so detections reflect your operating reality.</p>
                     </article>
                     <article class="card">
-                        <div class="card-kicker"><span>Retain</span><span class="card-index mono">04</span></div>
-                        <h3>Search beyond hot storage</h3>
-                        <p>Keep long-retention audit and security logs in your data lake while still making them available to analysts during incidents.</p>
+                        <div class="card-kicker"><span>S3 Search</span><span class="card-index mono">04</span></div>
+                        <h3>Keep searchable memory in S3</h3>
+                        <p>Searchable indices live in S3, so agents can validate cases against retained telemetry without forcing every byte into the SIEM hot tier.</p>
                     </article>
                 </div>
             </div>
         </section>
 
-        <section id="search" class="section">
+        <section id="agents" class="section">
             <div class="shell split">
-                <div class="search-copy">
-                    <div class="eyebrow mono">Rover Search</div>
-                    <h2>Fast answers across messy security data.</h2>
-                    <p>Search should not depend on whether data is hot, cold, structured, semi-structured, or sitting in object storage. Rover is designed for investigations that cross all of it.</p>
-                    <div class="search-list mono">
-                        <div><span>Search model</span><strong>Fields + raw text</strong></div>
-                        <div><span>Scope</span><strong>Cloud, app, auth, endpoint</strong></div>
-                        <div><span>Output</span><strong>Cases, alerts, exports, APIs</strong></div>
+                <div class="analytics-copy">
+                    <div class="eyebrow mono">Agentic SecOps</div>
+                    <h2>From signals to evidence-cited cases.</h2>
+                    <p>Rover agents do the repetitive work after detections fire: collect evidence, join sources, test hypotheses, explain confidence, suggest next pivots, and preserve the trail.</p>
+                    <div class="analytics-list mono">
+                        <div><span>Input</span><strong>Signals + detections</strong></div>
+                        <div><span>Search</span><strong>S3 indices + raw events</strong></div>
+                        <div><span>Output</span><strong>Cases, gaps, actions</strong></div>
                     </div>
                 </div>
 
-                <div class="query-workbench" aria-label="Interactive search workbench">
-                    <div class="workbench-top">
-                        <span class="mono">search console</span>
-                        <span id="workbench-status" class="mono">ready</span>
+                <div class="agent-runner" aria-label="Interactive Rover agent run">
+                    <div class="runner-top">
+                        <span class="mono">agent run / impossible-travel</span>
+                        <span id="agent-status" class="mono runner-status">ready</span>
                     </div>
-                    <div class="workbench-body">
-                        <div id="workbench-query" class="workbench-query mono">
-                            source = "cloudtrail"<br>
-                            event.name in ("CreateAccessKey", "AttachUserPolicy")<br>
-                            user.risk_score &gt; 70<br>
-                            group by user.name, aws.account_id
+                    <div class="runner-body">
+                        <div id="agent-prompt" class="agent-prompt mono">
+                            <span class="keyword">investigate</span> alert.id = <span class="value">"IAM-4812"</span><br>
+                            <span class="keyword">scope</span> s3.index.identity, cloud.audit, vpn, edr<br>
+                            <span class="keyword">goal</span> build case, explain risk, cite evidence, suggest response<br>
+                            <span class="keyword">guardrail</span> cite source events before action
                         </div>
-                        <div class="run-row">
-                            <button id="run-search" class="button primary" type="button">Run Search</button>
-                            <span class="mono" style="color: var(--muted-foreground); font-size: 12px;">Sample results only</span>
+                        <div class="runner-actions">
+                            <button id="run-agent" class="button primary" type="button">Run Agent</button>
+                            <span class="mono runner-status">sample workflow</span>
                         </div>
-                        <div class="result-strip">
-                            <div class="result">
-                                <span>Events</span>
-                                <strong id="result-events" class="mono">18,420</strong>
+                        <div class="timeline">
+                            <div class="timeline-row">
+                                <i class="mono">1</i>
+                                <div><strong>Collect evidence</strong><span>s3 indices, identity, vpn, cloud, endpoint</span></div>
+                                <em id="step-one" class="mono">waiting</em>
                             </div>
-                            <div class="result">
-                                <span>Sources</span>
-                                <strong id="result-sources" class="mono">12</strong>
+                            <div class="timeline-row">
+                                <i class="mono">2</i>
+                                <div><strong>Group related signals</strong><span>user, device, ip, account, process</span></div>
+                                <em id="step-two" class="mono">waiting</em>
                             </div>
-                            <div class="result">
-                                <span>Elapsed</span>
-                                <strong id="result-elapsed" class="mono">0.84s</strong>
+                            <div class="timeline-row">
+                                <i class="mono">3</i>
+                                <div><strong>Build attack narrative</strong><span>timeline, severity, confidence, evidence</span></div>
+                                <em id="step-three" class="mono">waiting</em>
+                            </div>
+                            <div class="timeline-row">
+                                <i class="mono">4</i>
+                                <div><strong>Recommend detection update</strong><span>adaptive coverage improvement queued</span></div>
+                                <em id="step-four" class="mono">waiting</em>
                             </div>
                         </div>
                     </div>
@@ -1260,35 +1535,35 @@
         <section id="architecture" class="section">
             <div class="shell">
                 <div class="section-head">
-                    <h2>Keep the data lake. Upgrade the SOC.</h2>
-                    <p>Rover keeps the SIEM workflow close to analysts while letting storage, governance, and retention stay aligned with your cloud architecture.</p>
+                    <h2>Three detection layers on S3-native search.</h2>
+                    <p>Rover combines core detections, adaptive environment-specific detections, and behavioral baselines with S3-hosted indices that make retained telemetry searchable for agents and analysts.</p>
                 </div>
 
-                <div class="pipeline">
-                    <article class="pipe-step">
-                        <span class="mono">01 / Ingest</span>
-                        <h3>Stream events</h3>
-                        <p>Collect security telemetry from agents, APIs, message buses, object stores, and lakehouse tables.</p>
+                <div class="loop">
+                    <article class="loop-step">
+                        <span class="mono">01 / Core</span>
+                        <h3>Baseline coverage</h3>
+                        <p>Start with core detections for common attack behaviors across identity, cloud, endpoint, application, SaaS, and audit sources.</p>
                     </article>
-                    <article class="pipe-step">
-                        <span class="mono">02 / Normalize</span>
-                        <h3>Map fields</h3>
-                        <p>Bring common entities like user, host, IP, cloud account, process, and service into a consistent schema.</p>
+                    <article class="loop-step">
+                        <span class="mono">02 / Adaptive</span>
+                        <h3>Environment logic</h3>
+                        <p>Generate and tune detections around your assets, business units, normal access paths, cloud accounts, and operational patterns.</p>
                     </article>
-                    <article class="pipe-step">
-                        <span class="mono">03 / Detect</span>
-                        <h3>Score signals</h3>
-                        <p>Apply rules, thresholds, lists, enrichment, and saved hunts to identify activity worth investigating.</p>
+                    <article class="loop-step">
+                        <span class="mono">03 / Behavior</span>
+                        <h3>Learn baselines</h3>
+                        <p>Model expected behavior for users, hosts, services, and workloads so agents can reason about activity that does not belong.</p>
                     </article>
-                    <article class="pipe-step">
+                    <article class="loop-step">
                         <span class="mono">04 / Search</span>
-                        <h3>Query evidence</h3>
-                        <p>Pivot from detections into raw logs, retained archives, and correlated context without switching tools.</p>
+                        <h3>Index in S3</h3>
+                        <p>Build searchable indices in S3 for entities, time ranges, source metadata, and raw-event pointers across retained telemetry.</p>
                     </article>
-                    <article class="pipe-step">
-                        <span class="mono">05 / Respond</span>
-                        <h3>Close cases</h3>
-                        <p>Preserve notes, timelines, searches, exports, and handoffs for incident response and compliance review.</p>
+                    <article class="loop-step">
+                        <span class="mono">05 / Case</span>
+                        <h3>Reason with agents</h3>
+                        <p>Agents assemble signals into evidence-cited cases, surface gaps, and feed improvements back into detection coverage.</p>
                     </article>
                 </div>
             </div>
@@ -1297,70 +1572,70 @@
         <section class="section dark">
             <div class="shell">
                 <div class="section-head">
-                    <h2>Why teams look for a different SIEM.</h2>
-                    <p>Security data keeps growing faster than hot-index budgets. Rover is built for teams that need fast search and practical retention in the same system.</p>
+                    <h2>Security coverage should not be priced out of the SIEM.</h2>
+                    <p>Legacy SIEM economics force teams to choose which telemetry they can afford to investigate. Rover keeps the SIEM experience while moving searchable memory and indices to S3.</p>
                 </div>
 
                 <div class="compare">
                     <div class="compare-col">
                         <h3>Legacy SIEM pressure</h3>
                         <ul>
-                            <li>High-value telemetry gets sampled, shortened, or excluded because every byte has to be indexed.</li>
-                            <li>Analysts leave the SIEM to search data lake archives during deep incident response.</li>
-                            <li>Detection, search, storage, and retention decisions become separate budget fights.</li>
-                            <li>Older investigations slow down when evidence moves from hot storage to cheaper tiers.</li>
+                            <li>Hot-tier storage makes long retention expensive.</li>
+                            <li>Teams drop or sample telemetry that agents need for investigation.</li>
+                            <li>Static rules create alert volume faster than analysts can investigate.</li>
+                            <li>AI summaries sit on top of alerts but cannot cheaply validate enough history.</li>
                         </ul>
                     </div>
                     <div class="compare-col">
-                        <h3>Rover approach</h3>
+                        <h3>Rover Agentic SIEM</h3>
                         <ul>
-                            <li>Treat search as a first-class SIEM workflow across hot, warm, and archived security data.</li>
-                            <li>Normalize common security entities while keeping raw logs available for exact evidence.</li>
-                            <li>Let teams retain more telemetry in cloud storage without giving up investigation access.</li>
-                            <li>Keep detections, cases, pivots, and query history in one analyst workspace.</li>
+                            <li>Agents and analysts search S3-hosted indices with source-level evidence.</li>
+                            <li>Telemetry stays retained in S3, keeping cost low while preserving investigation depth.</li>
+                            <li>Adaptive detections and behavioral baselines reduce noise before cases reach analysts.</li>
+                            <li>Every case leaves a reproducible trail for response, review, and detection improvement.</li>
                         </ul>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="use-cases" class="section">
+        <section id="outcomes" class="section">
             <div class="shell">
                 <div class="section-head">
-                    <h2>Built for common SOC searches.</h2>
-                    <p>Rover centers the workflows analysts run every day, from triage to after-action review.</p>
+                    <h2>The Rover difference.</h2>
+                    <p>Rover borrows the right lesson from the new detection era: the system has to reason. Rover applies that through an Agentic SIEM with S3-backed search and cost-aware retained telemetry.</p>
                 </div>
 
                 <div class="use-cases">
                     <article class="use-case">
-                        <span class="mono">Identity</span>
-                        <h3>Account takeover</h3>
-                        <p>Search sign-ins, MFA events, VPN logs, device posture, and privilege changes around one user.</p>
+                        <span class="mono">01 Agentic SIEM</span>
+                        <h3>Signals become cases</h3>
+                        <p>Rover treats alert triage as a SIEM-native workflow that turns related signals into evidence-cited cases.</p>
                     </article>
                     <article class="use-case">
-                        <span class="mono">Cloud</span>
-                        <h3>Risky admin activity</h3>
-                        <p>Trace keys, policies, console actions, workload changes, and network exposure across accounts.</p>
+                        <span class="mono">02 Agentic SecOps</span>
+                        <h3>Analyst-agent workflow</h3>
+                        <p>Agents gather evidence and propose decisions; analysts approve response, document cases, and improve detections.</p>
                     </article>
                     <article class="use-case">
-                        <span class="mono">Endpoint</span>
-                        <h3>Host investigation</h3>
-                        <p>Pivot through process starts, command lines, DNS, file writes, and EDR alerts without losing context.</p>
+                        <span class="mono">03 Search</span>
+                        <h3>S3-backed investigation</h3>
+                        <p>Search runs over S3-hosted indices so older and lower-frequency telemetry remains useful during incidents.</p>
                     </article>
                     <article class="use-case">
-                        <span class="mono">Application</span>
-                        <h3>Abuse detection</h3>
-                        <p>Connect API gateway, app, auth, payment, and fraud signals for user and session-level searches.</p>
+                        <span class="mono">04 Detection</span>
+                        <h3>Adaptive coverage</h3>
+                        <p>Rover tunes detection logic around your environment so generic rules become operating-context-aware signals.</p>
                     </article>
                     <article class="use-case">
-                        <span class="mono">Compliance</span>
-                        <h3>Audit evidence</h3>
-                        <p>Find years-old access events and administrative activity without restoring separate archive systems.</p>
+                        <span class="mono">05 Cost</span>
+                        <h3>Reduce SIEM pressure</h3>
+                        <p>Move index and retention economics to S3 while keeping the SIEM experience for alerts and response.</p>
                     </article>
                     <article class="use-case">
-                        <span class="mono">Response</span>
-                        <h3>Incident timelines</h3>
-                        <p>Build timelines from alerts, searches, entity pivots, notes, and preserved result sets.</p>
+                        <span class="mono">06 Response</span>
+                        <h3>Preserve the story</h3>
+                        <p>Keep alerts, searches, agent findings, entity pivots, notes, timelines, and exports together.</p>
                     </article>
                 </div>
             </div>
@@ -1370,7 +1645,7 @@
             <div class="shell cta-box">
                 <div>
                     <div class="eyebrow mono">Early access</div>
-                    <h2>Bring SIEM and security search into one Rover workspace.</h2>
+                    <h2>Make Rover your Agentic SIEM with S3-native search.</h2>
                 </div>
                 <div class="signup">
                     <form action="https://formspree.io/f/xgopbprl" method="POST">
@@ -1380,6 +1655,7 @@
                 </div>
             </div>
         </section>
+
     </main>
 
     <footer class="footer">
@@ -1394,41 +1670,33 @@
     </footer>
 
     <script>
-        const queryExamples = {
-            identity: `<span class="keyword">from</span> identity.signin<br><span class="keyword">where</span> user.risk = <span class="value">"high"</span> and mfa.result != <span class="value">"passed"</span><br><span class="keyword">join</span> cloud.audit on user.id<br><span class="keyword">summarize</span> attempts, countries, services by user.email`,
-            cloud: `<span class="keyword">from</span> cloud.audit<br><span class="keyword">where</span> event.name in (<span class="value">"CreateAccessKey"</span>, <span class="value">"AttachUserPolicy"</span>)<br><span class="keyword">lookup</span> asset.owner by cloud.account<br><span class="keyword">sort</span> by event.time desc`,
-            endpoint: `<span class="keyword">from</span> endpoint.process<br><span class="keyword">where</span> process.parent = <span class="value">"winword.exe"</span><br><span class="keyword">join</span> network.dns on host.id<br><span class="keyword">show</span> host, user, command_line, domain`,
-            archive: `<span class="keyword">from</span> archive.audit<br><span class="keyword">where</span> event.time between <span class="value">"2025-01-01"</span> and <span class="value">"2025-12-31"</span><br><span class="keyword">filter</span> action = <span class="value">"permission_change"</span><br><span class="keyword">summarize</span> by actor, resource, action`
-        };
+        const runButton = document.getElementById("run-agent");
+        const status = document.getElementById("agent-status");
+        const steps = [
+            document.getElementById("step-one"),
+            document.getElementById("step-two"),
+            document.getElementById("step-three"),
+            document.getElementById("step-four")
+        ];
 
-        document.querySelectorAll(".query-tab").forEach((tab) => {
-            tab.addEventListener("click", () => {
-                document.querySelectorAll(".query-tab").forEach((item) => item.classList.remove("active"));
-                tab.classList.add("active");
-                document.getElementById("hero-query").innerHTML = queryExamples[tab.dataset.query];
+        runButton.addEventListener("click", async () => {
+            runButton.disabled = true;
+            status.textContent = "running";
+            steps.forEach((step) => {
+                step.textContent = "waiting";
             });
-        });
 
-        document.getElementById("run-search").addEventListener("click", async () => {
-            const status = document.getElementById("workbench-status");
-            const events = document.getElementById("result-events");
-            const sources = document.getElementById("result-sources");
-            const elapsed = document.getElementById("result-elapsed");
-            const button = document.getElementById("run-search");
+            for (const step of steps) {
+                step.textContent = "running";
+                await new Promise((resolve) => setTimeout(resolve, 420));
+                step.textContent = "complete";
+            }
 
-            button.disabled = true;
-            status.textContent = "searching";
-
-            await new Promise((resolve) => setTimeout(resolve, 650));
-
-            events.textContent = (15400 + Math.floor(Math.random() * 6200)).toLocaleString();
-            sources.textContent = String(9 + Math.floor(Math.random() * 6));
-            elapsed.textContent = (0.58 + Math.random() * 0.62).toFixed(2) + "s";
-            status.textContent = "complete";
-            button.disabled = false;
+            status.textContent = "triage ready";
+            runButton.disabled = false;
 
             setTimeout(() => {
-                if (status.textContent === "complete") {
+                if (status.textContent === "triage ready") {
                     status.textContent = "ready";
                 }
             }, 1800);
